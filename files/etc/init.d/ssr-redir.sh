@@ -45,6 +45,7 @@ start()
 	local vt_timeout=`uci get shadowsocksr.@shadowsocksr[0].timeout 2>/dev/null`
 	local vt_safe_dns=`uci get shadowsocksr.@shadowsocksr[0].safe_dns 2>/dev/null`
 	local vt_safe_dns_port=`uci get shadowsocksr.@shadowsocksr[0].safe_dns_port 2>/dev/null`
+	local vt_chinadns_port=`uci get chinadns.@chinadns[0].port`
 	local vt_proxy_mode=`uci get shadowsocksr.@shadowsocksr[0].proxy_mode`
 	local vt_dns_mode=`uci get shadowsocksr.@shadowsocksr[0].dns_mode`
 	local adbyby=`uci get shadowsocksr.@shadowsocksr[0].adbyby`
@@ -319,6 +320,13 @@ EOF
 		tunnel_all)
 			/usr/bin/ssr-local -c $SSR_CONF -u -b0.0.0.0 -l$SS_LOCAL_PORT -s$vt_server_addr -p$vt_server_port -k"$vt_password" -m$vt_method -t$vt_timeout -f $SS_LOCAL_PIDFILE -L $vt_safe_dns:$vt_safe_dns_port
 			echo server=127.0.0.1#$SS_LOCAL_PORT > /var/etc/dnsmasq-go.d/01-pollution.conf
+			uci delete dhcp.@dnsmasq[0].resolvfile
+			uci set dhcp.@dnsmasq[0].noresolv=1
+			uci commit dhcp
+			;;
+		tunnel_chinadns)
+			/usr/bin/ssr-local -c $SSR_CONF -u -b0.0.0.0 -l$SS_LOCAL_PORT -s$vt_server_addr -p$vt_server_port -k"$vt_password" -m$vt_method -t$vt_timeout -f $SS_LOCAL_PIDFILE -L $vt_safe_dns:$vt_safe_dns_port
+			echo server=127.0.0.1#$vt_chinadns_port > /var/etc/dnsmasq-go.d/01-pollution.conf
 			uci delete dhcp.@dnsmasq[0].resolvfile
 			uci set dhcp.@dnsmasq[0].noresolv=1
 			uci commit dhcp
