@@ -136,6 +136,9 @@ msgstr "基于GFWList隧道模式"
 msgid "Tunnel mode for all"
 msgstr "全局隧道模式"
 
+msgid "Tunnel mode for chinadns"
+msgstr "ChinaDNS隧道模式"
+
 msgid "Local safe DNS"
 msgstr "本地请求安全DNS"
 
