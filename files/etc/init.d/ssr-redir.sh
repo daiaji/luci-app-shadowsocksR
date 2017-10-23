@@ -67,7 +67,7 @@ start()
 	fi
 
 	[ -z "$vt_proxy_mode" ] && vt_proxy_mode=S
-	[ -z "$vt_dns_mode" ] && vt_dns_mode=tcp_gfwlist
+	[ -z "$vt_dns_mode" ] && vt_dns_mode=tunnel_chinadns
 	[ -z "$vt_method" ] && vt_method=table
 	[ -z "$vt_timeout" ] && vt_timeout=60
 	case "$vt_proxy_mode" in
@@ -329,8 +329,8 @@ EOF
 			echo server=127.0.0.1#$vt_chinadns_port > /var/etc/dnsmasq-go.d/01-pollution.conf
 			uci delete dhcp.@dnsmasq[0].resolvfile
 			uci set dhcp.@dnsmasq[0].noresolv=1
-			uci set chinadns.@chinadns[0].enable='1'
-			uci set chinadns.@chinadns[0].server='178.79.131.110,127.0.0.1#$SS_LOCAL_PORT'
+			uci set chinadns.@chinadns[0].enable=1
+			uci set chinadns.@chinadns[0].server="178.79.131.110,127.0.0.1#$SS_LOCAL_PORT"
 			uci commit chinadns
 			uci commit dhcp
 			;;
