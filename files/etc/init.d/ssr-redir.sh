@@ -333,6 +333,7 @@ EOF
 			uci set chinadns.@chinadns[0].server="178.79.131.110,127.0.0.1#$SS_LOCAL_PORT"
 			uci commit chinadns
 			uci commit dhcp
+			/etc/init.d/chinadns start
 			;;
 	esac
 	
