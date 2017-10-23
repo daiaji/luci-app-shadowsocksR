@@ -329,6 +329,9 @@ EOF
 			echo server=127.0.0.1#$vt_chinadns_port > /var/etc/dnsmasq-go.d/01-pollution.conf
 			uci delete dhcp.@dnsmasq[0].resolvfile
 			uci set dhcp.@dnsmasq[0].noresolv=1
+			uci set chinadns.@chinadns[0].enable='1'
+			uci set chinadns.@chinadns[0].server='178.79.131.110,127.0.0.1#$SS_LOCAL_PORT'
+			uci commit chinadns
 			uci commit dhcp
 			;;
 	esac
