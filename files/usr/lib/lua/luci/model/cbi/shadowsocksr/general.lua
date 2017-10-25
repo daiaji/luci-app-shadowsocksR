@@ -113,6 +113,7 @@ safe_dns = s:option(Value, "safe_dns", translate("Safe DNS"),
 safe_dns.datatype = "ip4addr"
 safe_dns.optional = false
 safe_dns.placeholder = "208.67.220.220"
+safe_dns.default = "208.67.220.220"
 safe_dns:depends("more", "1")
 
 safe_dns_port = s:option(Value, "safe_dns_port", translate("Safe DNS Port"),
@@ -120,6 +121,7 @@ safe_dns_port = s:option(Value, "safe_dns_port", translate("Safe DNS Port"),
 safe_dns_port.datatype = "range(1,65535)"
 safe_dns_port.placeholder = "443"
 safe_dns_port.optional = false
+safe_dns_port.default = "443"
 safe_dns_port:depends("more", "1")
 
 
@@ -134,6 +136,7 @@ dns_mode:value("tunnel_chinadns", translate("Tunnel mode for chinadns"))
 dns_mode:value("safe_only", translate("Local safe DNS"))
 dns_mode:value("local", translate("System default"))
 dns_mode:depends("more", "1")
+dns_mode.default = "tunnel_chinadns"
 
 protocol_param = s:option(Value, "protocol_param", translate("Protocol Param"),
 	translate("leave it empty is well"))
@@ -155,3 +158,4 @@ if apply then
 end
 
 return m
+
